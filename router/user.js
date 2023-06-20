@@ -171,5 +171,6 @@ router.delete("/delete-account", async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
 // Export the router
 module.exports = router;
