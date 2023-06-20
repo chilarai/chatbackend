@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const InitiateMongoServer = require("./config/db");
-const user = require("./router/user");
+const userRoutes = require("./router/user");
+const chatRoutes = require("./router/chat");
 const cors = require("cors");
 require('dotenv').config()
 
@@ -19,9 +20,10 @@ app.get("/", (req, res) => {
 });
 
 // router
+app.use("/user", userRoutes);
+app.use("/chat", chatRoutes);
 
-app.use("/user", user);
-
+// Start the server
 app.listen(process.env.PORT, (req, res) => {
   console.log(`Server Started at PORT ${process.env.PORT}`);
 });
