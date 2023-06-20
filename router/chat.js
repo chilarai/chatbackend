@@ -1,6 +1,5 @@
 const express = require("express");
-const { check, validationResult } = require("express-validator");
-const jwt = require("jsonwebtoken");
+const Chat = require("../modal/Chat");
 const { Configuration, OpenAIApi } = require("openai");
 const router = express.Router();
 
@@ -45,6 +44,9 @@ router.post("/chat", async (req, res) => {
         if(responseTxtArray[0].includes("->")){
             responseTxtArray[0] = responseTxtArray[0].replace("->", "")
         } 
+
+        let chat = new Chat({question});
+        await chat.save();
 
         return res.status(200).json({ message: responseTxtArray[0] });
 
